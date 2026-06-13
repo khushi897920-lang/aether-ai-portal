@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  {/* Left panel of A: Crisp white */}
+  <polygon points="50,15 15,85 35,85 50,48" fill="#FFFFFF" />
+  {/* Right panel of A: Muted corporate silver/gray */}
+  <polygon points="50,15 50,48 65,85 85,85" fill="#CBD5E1" />
+  {/* Inner accent circle: Vibrant coral-orange */}
+  <circle cx="50" cy="58" r="9" fill="#FF6F59" />
+</svg>
