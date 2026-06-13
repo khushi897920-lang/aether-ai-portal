@@ -127,7 +127,13 @@ export default function Dashboard() {
     .reverse()
     .map((emp) => ({
       id: emp._id,
-      text: `${emp.name ?? 'New Employee'} joined as ${emp.role ?? 'Staff'} in ${emp.department ?? 'Operations'}`,
+      text: (
+        <>
+          <span className="font-semibold text-void-950">{emp.name ?? 'New Employee'}</span> joined as{' '}
+          <span className="font-semibold text-void-950">{emp.role ?? 'Staff'}</span> in{' '}
+          <span className="font-semibold text-void-950">{emp.department ?? 'Operations'}</span>
+        </>
+      ),
       time: emp.joinDate ? new Date(emp.joinDate).toLocaleDateString('en-US', { day: 'numeric', month: 'short' }) : 'Recent',
       icon: User,
       iconBg: 'bg-mint-100 text-mint-800'
@@ -136,28 +142,46 @@ export default function Dashboard() {
   const activities = dbActivities.length > 0 ? dbActivities : [
     {
       id: 'act_01',
-      text: 'A new employee, Olivia Martinez, joined the Design team',
+      text: (
+        <>
+          A new employee, <span className="font-semibold text-void-950">Olivia Martinez</span>, joined the{' '}
+          <span className="font-semibold text-void-950">Design</span> team
+        </>
+      ),
       time: '2h ago',
       icon: User,
       iconBg: 'bg-mint-100 text-mint-800',
     },
     {
       id: 'act_02',
-      text: "Michael Chen's profile was updated",
+      text: (
+        <>
+          <span className="font-semibold text-void-950">Michael Chen's</span> profile was updated
+        </>
+      ),
       time: '5h ago',
       icon: UserCheck,
       iconBg: 'bg-blue-50 text-blue-700',
     },
     {
       id: 'act_03',
-      text: 'Priya Sharma was promoted to Senior Data Scientist',
+      text: (
+        <>
+          <span className="font-semibold text-void-950">Priya Sharma</span> was promoted to{' '}
+          <span className="font-semibold text-void-950">Senior Data Scientist</span>
+        </>
+      ),
       time: '1d ago',
       icon: ArrowUpRight,
       iconBg: 'bg-emerald-50 text-emerald-700',
     },
     {
       id: 'act_04',
-      text: "New department 'AI Research' was created",
+      text: (
+        <>
+          New department <span className="font-semibold text-void-950">'AI Research'</span> was created
+        </>
+      ),
       time: '2d ago',
       icon: FileText,
       iconBg: 'bg-amber-50 text-amber-700',
@@ -195,7 +219,7 @@ export default function Dashboard() {
                   <p className="text-[10px] font-mono font-medium tracking-wider text-void-700/50 uppercase">
                     {m?.title ?? '—'}
                   </p>
-                  <h3 className="text-3xl font-sans font-semibold text-void-950 mt-2">
+                  <h3 className="font-extrabold tracking-tight text-slate-900 text-3xl mt-2">
                     {m?.value ?? '0'}
                   </h3>
                 </div>
@@ -300,7 +324,7 @@ export default function Dashboard() {
                       
                       {/* Text meta */}
                       <div className="min-w-0 flex-1">
-                        <p className="text-xs font-medium text-void-950/80 leading-normal group-hover:text-void-950 transition-colors">
+                        <p className="text-xs font-medium text-void-950/80 leading-relaxed group-hover:text-void-950 transition-colors">
                           {act?.text ?? 'Activity entry.'}
                         </p>
                         <span className="text-[10px] text-void-700/40 block mt-1.5 font-sans font-medium">

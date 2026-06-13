@@ -36,7 +36,7 @@ export default function Sidebar() {
                 key={item.name}
                 to={item.path}
                 className={
-                  `flex items-center space-x-3 px-4 py-3 rounded-xl text-sm font-sans font-medium transition-all duration-250 ${
+                  `flex items-center align-middle gap-3 px-4 py-3 rounded-xl text-sm font-sans font-medium transition-all duration-250 ${
                     isActive
                       ? 'bg-forest-800 text-white shadow-[0_4px_12px_rgba(5,68,50,0.2)]'
                       : 'text-white/60 hover:text-white hover:bg-white/5'
