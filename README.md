@@ -91,17 +91,17 @@ Aether AI operates on a modern, decoupled client-server architecture. All data f
 
 ## 📸 Screenshots
 
-> 📸 **Login / Auth Page** — `![Login / Auth Page](screenshots/login-page.png)`
+> 📸 **Login / Auth Page** — ![Login / Auth Page](screenshots/login-page.png)
 > 
-> 📸 **Dashboard Home** — `![Dashboard Home](screenshots/dashboard-home.png)`
+> 📸 **Dashboard Home** — ![Dashboard Home](screenshots/dashboard-home.png)
 > 
-> 📸 **Employee Ledger** — `![Employee Ledger](screenshots/employee-ledger.png)`
+> 📸 **Employee Ledger** — ![Employee Ledger](screenshots/employee-ledger.png)
 > 
-> 📸 **Add Employee Form** — `![Add Employee Form](screenshots/add-employee.png)`
+> 📸 **Add Employee Form** — ![Add Employee Form](screenshots/add-employee.png)
 > 
-> 📸 **Register Page** — `![Register Page](screenshots/register-page.png)`
+> 📸 **Register Page** — ![Register Page](screenshots/register-page.png)
 > 
-> 📸 **Profile / Settings** — `![Profile / Settings](screenshots/profile-settings.png)`
+> 📸 **Profile / Settings** — ![Profile / Settings](screenshots/profile-settings.png)
 
 <br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
 
