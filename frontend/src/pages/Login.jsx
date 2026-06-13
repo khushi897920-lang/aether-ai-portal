@@ -37,9 +37,8 @@ export default function Login() {
     }
   };
 
-  const loadDemoAdmin = () => {
-    setEmail('admin@aether.ai');
-    setPassword('demo-admin-pass');
+  const handleSSO = () => {
+    alert("Aether AI Enterprise Single Sign-On (SSO) is currently in staged provisioning. For this evaluation pass, please utilize your registered administrative email and password credentials.");
   };
 
   return (
@@ -154,7 +153,7 @@ export default function Login() {
           {/* SSO Button */}
           <button
             type="button"
-            onClick={loadDemoAdmin}
+            onClick={handleSSO}
             className="w-full py-2.5 bg-white hover:bg-canvas-50 border border-canvas-200 rounded-xl text-xs font-semibold text-void-700/80 flex items-center justify-center space-x-2 transition-all cursor-pointer shadow-[0_1px_2px_0_rgba(9,13,22,0.02)]"
           >
             <Shield className="w-3.5 h-3.5 text-void-700/40" />
