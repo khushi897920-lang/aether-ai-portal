@@ -15,8 +15,20 @@ const app = express();
 
 // Global Middlewares
 app.use(express.json());
+
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://aether-ai-portal.vercel.app'
+];
+
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Blocked by Aether CORS Policy'));
+    }
+  },
   credentials: true
 }));
 
