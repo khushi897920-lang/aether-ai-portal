@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 
-const API_BASE_URL = window.location.hostname === 'localhost'
-  ? 'http://localhost:5000/api'
-  : 'https://aether-ai-portal.onrender.com/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 import { 
   Users, 
   Building2, 
