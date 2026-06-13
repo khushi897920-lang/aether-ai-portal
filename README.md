@@ -1,157 +1,234 @@
-# Aether AI Enterprise Portal
-
-An executive-grade, full-stack enterprise employee management platform designed with high-security route guards, robust cryptographic identity controls, and transaction-safe database pipelines.
-
----
-
-## 1. Executive Overview
-
-The **Aether AI Enterprise Portal** is a decoupled full-stack application built to manage corporate organization records securely. The architecture separates the interactive client layer from the transactional data layer to ensure isolated security boundaries, low-latency rendering, and high accessibility.
-
-```
-                  ┌──────────────────────────────┐
-                  │      Interactive Client      │
-                  │  Vite + React 19 + Three.js  │
-                  └──────────────┬───────────────┘
-                                 │
-                     HTTPS / JSON API Requests
-                     (Guarded by Auth Headers)
-                                 │
-                                 ▼
-                  ┌──────────────────────────────┐
-                  │      RESTful API Engine      │
-                  │       Node.js + Express      │
-                  └──────────────┬───────────────┘
-                                 │
-                        Mongoose connection
-                        (SSL Encrypted)
-                                 │
-                                 ▼
-                  ┌──────────────────────────────┐
-                  │     Secure Storage Node      │
-                  │      MongoDB Atlas Cloud     │
-                  └──────────────────────────────┘
+```text
+ █████╗ ███████╗████████╗██╗  ██╗███████╗██████╗      █████╗ ██╗
+██╔══██╗██╔════╝╚══██╔══╝██║  ██║██╔════╝██╔══██╗    ██╔══██╗██║
+███████║█████╗     ██║   ███████║█████╗  ██████╔╝    ███████║██║
+██╔══██║██╔══╝     ██║   ██╔══██║██╔══╝  ██╔══██╗    ██╔══██║██║
+██║  ██║███████╗   ██║   ██║  ██║███████╗██║  ██║    ██║  ██║██║
+╚═╝  ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚═╝
 ```
 
-During **Task 2** and **Task 3**, the system's foundational components were completed, verified, and hardened:
-- **Client Workspace**: Upgraded with a professional geometric layout utilizing Outfit and Inter typeface scales, an interactive user profile state widget, real-time notification feeds, custom split-vector SVG branding nodes, and error boundary wrappers.
-- **Server Engine**: Configured with a modular Node.js ES Module architecture featuring Mongoose schema hooks, JWT middleware validators, and atomic CRUD controllers.
-- **Full-Stack Integration**: Dismantled local mock states and established a live network data pipeline linking the client to the server on port `5000` and persisting all transactions in MongoDB Atlas.
+*A Decoupled Full-Stack Enterprise Ledger & High-Security Access Gateway built for WeIntern Weeks 2 & 3*
 
----
+[![React 19](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](#)
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](#)
+[![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](#)
+[![Tailwind CSS v4](https://img.shields.io/badge/Tailwind_CSS_v4-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)](#)
+[![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=jsonwebtokens&logoColor=white)](#)
+[![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=threedotjs&logoColor=white)](#)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](#)
+[![Status: Active](https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge)](#)
 
-## 2. Tech Stack Matrix
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
 
-| Layer | Technology | Version / Spec | Purpose & Implementation Details |
+## 📌 Table of Contents
+- [🧭 Executive Overview](#-executive-overview)
+- [🏗️ System Architecture](#️-system-architecture)
+- [⚙️ Tech Stack Matrix](#️-tech-stack-matrix)
+- [📸 Screenshots](#-screenshots)
+- [🔐 Cryptographic Blueprint](#-cryptographic-blueprint)
+- [📡 API Reference](#-api-reference)
+- [🚀 Quick-Start](#-quick-start)
+- [🔒 Environment Isolation](#-environment-isolation)
+- [🤝 Contributing \& 📄 License](#-contributing---license)
+
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
+
+## 🧭 Executive Overview
+
+The **Aether AI Enterprise Portal** is a high-availability, fully decoupled administrative control plane designed to securely manage organizational employee ledgers. Tailored specifically for **WeIntern Week 2 (Task 2)** and **Week 3 (Task 3)**, the portal implements defensive authorization filters, dynamic data visualization, and transaction-safe database gateways to resolve administrative bottlenecks in real-time.
+
+| 🛡️ Cryptographic Shielding | 📊 Real-Time Operations Grid | ⚡ Decentralized Performance |
+| :--- | :--- | :--- |
+| Enforces strict pre-save Bcrypt password hashing hooks alongside stateless 30-day JWT headers to guard administrative routing channels. | Dynamically parses database payloads to render active staff counts, unique segment allocations, and timeline change streams. | Decouples the React client workspace from the Node.js API engine to maximize load speeds and assure visual resilience. |
+
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
+
+## 🏗️ System Architecture
+
+Aether AI operates on a modern, decoupled client-server architecture. All data flows securely through encrypted SSL layers and is validated via Express route guards before accessing the cloud cluster.
+
+```text
+┌────────────────────────────────────────────────────────┐
+│                    Interactive Client                  │
+│       Vite + React 19 + Three.js + Tailwind CSS v4     │
+└───────────────────────────┬────────────────────────────┘
+                            │
+              HTTPS / JSON API Data Exchange
+            Guarded by JWT Bearer Auth Headers
+                            │
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│                   Secure API Engine                    │
+│             Node.js + Express REST API Gateway         │
+└───────────────────────────┬────────────────────────────┘
+                            │
+             Mongoose ODM Object-Document Mapping
+                 SSL-Encrypted Pipeline Link
+                            │
+                            ▼
+┌────────────────────────────────────────────────────────┐
+│                 Cloud Storage Database                 │
+│               MongoDB Atlas Cluster Node               │
+└────────────────────────────────────────────────────────┘
+```
+
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
+
+## ⚙️ Tech Stack Matrix
+
+| Layer | Technology | Spec / Version | Implementation Target |
 | :--- | :--- | :--- | :--- |
-| **Frontend Client** | React | `^19.0.0` | Declarative UI rendering, component encapsulation, and state orchestration. |
-| **Styling Engine** | Tailwind CSS | `v4.0` | Atomic layout composition and responsive design configurations. |
-| **Visual Canvas** | Three.js | Canvas | Particle background vectors and interactive structural geometry. |
-| **Routing / State** | React Router | `^6.22.0` | Client-side routing, protected viewport switches, and navigation guardrails. |
-| **Web Server** | Node.js | `^20.0.0` | Cross-platform runtime executing the main Express server instance. |
-| **API Framework** | Express | `^4.19.0` | Light HTTP router handling authentication streams and employee API routes. |
-| **ODM Gateway** | Mongoose | `^8.2.0` | Object Document Mapper defining structural schemas and validating database input. |
-| **Database Cluster** | MongoDB Atlas | Cloud | Distributed, high-availability document database engine with SSL security. |
+| **Frontend Client** | React | `^19.0.0` | UI structure, client-side routing, and central AuthContext provider. |
+| **Style Canvas** | Tailwind CSS | `v4.0` | Dynamic layout composition and terminal dark/light custom variables. |
+| **Geometry Canvas** | Three.js | Canvas Vectors | Render interactive particle background meshes and geometric nodes. |
+| **Routing Shield** | React Router | `v6.22.0` | Protected viewport redirects and client-side page indexing. |
+| **Server Runtime** | Node.js | `^20.0.0` | Execution context for the backend API controllers. |
+| **API Framework** | Express | `^4.19.0` | RESTful routing gateway handling client fetch requests. |
+| **ODM Interface** | Mongoose | `^8.2.0` | Structured document schemas and validation constraints. |
+| **Database Cluster** | MongoDB Atlas | Cloud Cluster | Distributed, secure persistence layer for users and employees. |
 
----
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
 
-## 3. Cryptographic Blueprint
+## 📸 Screenshots
 
-To protect system credentials and secure the structural employee ledger routing layers, the platform implements a dual-layer cryptographic framework:
+> 📸 **Login / Auth Page** — `![Login / Auth Page](screenshots/login-page.png)`
+> 
+> 📸 **Dashboard Home** — `![Dashboard Home](screenshots/dashboard-home.png)`
+> 
+> 📸 **Employee Ledger** — `![Employee Ledger](screenshots/employee-ledger.png)`
+> 
+> 📸 **Add Employee Form** — `![Add Employee Form](screenshots/add-employee.png)`
+> 
+> 📸 **Register Page** — `![Register Page](screenshots/register-page.png)`
+> 
+> 📸 **Profile / Settings** — `![Profile / Settings](screenshots/profile-settings.png)`
 
-### A. Credential Protection (BcryptJS Salt Operations)
-All administrator passwords are encrypted before they hit the database. 
-- **Trigger**: The encryption lifecycle is managed in the Mongoose User Model schema ([User.js](file:///d:/Projects/WeIntern/week2-task2/aether-ai-portal/backend/models/User.js)) via a pre-save hook (`UserSchema.pre('save', ...)`).
-- **Security Strength**: Passwords undergo a hashing routine using `bcryptjs` with a cost factor of `10` salt rounds. Raw passwords are never written to standard logs or stored in plaintext.
-- **Verification**: User authentication employs the asynchronous model instance method `.matchPassword(enteredPassword)` which compares input strings with the stored cryptographic hash safely.
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
 
-### B. Session Security (30-Day JWT Headers)
-Session state is stateless, utilizing cryptographically signed JSON Web Tokens (JWT).
-- **Token Signature**: Upon successful registration or login, the auth router ([authRoutes.js](file:///d:/Projects/WeIntern/week2-task2/aether-ai-portal/backend/routes/authRoutes.js)) generates a JWT payload signed with the global `JWT_SECRET` key via HMAC-SHA256.
-- **Expiration Limit**: Tokens are configured with a strict expiration boundary of `30d` (30 days) to balance user experience and security.
-- **Route Authorization**: Protected endpoints are wrapped by the auth middleware ([authMiddleware.js](file:///d:/Projects/WeIntern/week2-task2/aether-ai-portal/backend/middleware/authMiddleware.js)). The middleware intercepts the request, extracts the `Authorization: Bearer <JWT_TOKEN>` header, decodes the signature, and mounts the authenticated user record to the request context.
+## 🔐 Cryptographic Blueprint
 
----
+### A. BcryptJS Password Protection
+Administrator authentication channels are protected against raw data leaks using mathematical hashing algorithms.
+- **Pre-Save Interceptor**: Before writing credentials to the database, a Mongoose middleware hook automatically intercepts the password field, generates a salt using `10` rounds, and converts the plaintext password to a high-entropy hash.
+- **Verification**: Login requests invoke the custom schema instance method `matchPassword()` to verify hashes securely.
 
-## 4. Quick-Start Blueprint
+```javascript
+// backend/models/User.js - Password Hashing Hook
+UserSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
 
-To run the Aether AI Enterprise Portal locally, follow these direct steps.
-
-### A. Environment Configuration
-First, initialize the backend configuration. Copy the environment template:
-```bash
-cp backend/.env.example backend/.env
-```
-Open `backend/.env` and update the connection values (see Section 6 below).
-
-### B. Dependency Installation
-Install dependencies for both the frontend and backend workspaces:
-```bash
-# Install root/backend requirements
-cd backend
-npm install
-
-# Install frontend requirements
-cd ../frontend
-npm install
+UserSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 ```
 
-### C. Booting the Application
-You can run the frontend and backend servers simultaneously. Open two terminal instances or run them concurrently:
+### B. Stateful JWT Route Guarding
+State validation is stateless and managed via signed JSON Web Tokens (JWT).
+- **Signing**: Successful logins or registrations return a JWT signed with the `JWT_SECRET` key using HMAC-SHA256, set to expire in `30d`.
+- **Extraction**: The auth middleware extracts the `Bearer <Token>` string from the `Authorization` header and decodes it.
 
-#### Terminal 1: Launch Backend API Server
-```bash
-cd backend
-npm start
+```javascript
+// backend/middleware/authMiddleware.js - JWT Interceptor Shield
+export const protect = async (req, res, next) => {
+  let token = req.headers.authorization?.startsWith('Bearer') 
+    ? req.headers.authorization.split(' ')[1] 
+    : null;
+
+  if (!token) return res.status(401).json({ message: '401 Access Token Invalid or Expired' });
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = await User.findById(decoded.id).select('-password');
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: '401 Authorization preflight failed' });
+  }
+};
 ```
-*Expected console output:*
-> 📡 Server actively listening on port 5000 in development mode  
-> 🛸 Database Connected: Aether Atlas Core Active
 
-#### Terminal 2: Launch Frontend Client
-```bash
-cd frontend
-npm run dev
-```
-*Expected console output:*
->  VITE v6.x.x  ready in X ms  
->  ➜  Local:   http://localhost:5173/
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
 
----
+## 📡 API Reference
 
-## 5. API Reference Spec
+All requests and responses carry `application/json` content-type payloads.
 
-All network exchanges carry JSON request bodies and responses. Authentication endpoints are public, while Employee endpoints require the token header.
-
-| HTTP Method | Route Endpoint | Required Header | Request Body Schema | Success Status | Fail Status (Typical) | Response Body Spec |
+| Method | Endpoint | Auth Required | Request Body Schema | Success | Error Status | Response Payload Spec |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **POST** | `/api/auth/register` | None | `{ "name": "...", "email": "...", "password": "..." }` | **211** | `400` / `500` | Created user details & signed JWT token |
 | **POST** | `/api/auth/login` | None | `{ "email": "...", "password": "..." }` | **200** | **401** / `500` | Authenticated user details & signed JWT token |
-| **GET** | `/api/health` | None | None | **200** | `500` | Server status logs, operational metrics, timestamp |
-| **GET** | `/api/employees` | `Authorization: Bearer <JWT>` | None | **200** | **401** / `500` | List of all employee ledger documents |
-| **POST** | `/api/employees` | `Authorization: Bearer <JWT>` | `{ "name": "...", "email": "...", "department": "...", "role": "...", "salary": 120000, "joinDate": "YYYY-MM-DD" }` | **201** | `400` / **401** / `500` | Created employee document details |
-| **PUT** | `/api/employees/:id` | `Authorization: Bearer <JWT>` | `{ "department": "...", "salary": 140000 }` (partial fields allowed) | **200** | **401** / `404` / `500` | Updated employee document details |
-| **DELETE** | `/api/employees/:id` | `Authorization: Bearer <JWT>` | None | **200** | **401** / `404` / `500` | Confirmation message of successful deletion |
+| **GET** | `/api/health` | None | None | **200** | `500` | API engine health and database status |
+| **GET** | `/api/employees` | JWT Bearer | None | **200** | **401** / `500` | Array containing employee documents |
+| **POST** | `/api/employees` | JWT Bearer | `{ "name": "...", "email": "...", "department": "...", "role": "...", "salary": 90000, "joinDate": "2026-06-13" }` | **201** | `400` / **401** / `500` | Created employee document details |
+| **PUT** | `/api/employees/:id` | JWT Bearer | `{ "salary": 95000 }` (partial fields allowed) | **200** | **401** / `404` / `500` | Updated employee document details |
+| **DELETE** | `/api/employees/:id` | JWT Bearer | None | **200** | **401** / `404` / `500` | Confirmation message of deletion success |
 
----
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
 
-## 6. Environment Isolation Guard
+## 🚀 Quick-Start
+
+Follow these instructions to boot the full-stack portal environment locally.
+
+### Step 1: Clone + Environment setup
+Clone this repository to your workspace:
+```bash
+git clone https://github.com/khushi897920-lang/aether-ai-portal.git
+cd aether-ai-portal
+cp backend/.env.example backend/.env
+```
+Update the `.env` settings (details below).
+
+### Step 2: Install Node Dependencies
+Deploy package installations across both environments:
+```bash
+# Target backend engine dependencies
+cd backend && npm install
+
+# Target frontend client dependencies
+cd ../frontend && npm install
+```
+
+### Step 3: Launch Local clusters
+Launch the Node.js API server and Vite React client concurrently:
+```bash
+# Inside aether-ai-portal/backend
+npm start
+# Console Output:
+# 📡 Server actively listening on port 5000 in development mode
+# 🛸 Database Connected: Aether Atlas Core Active
+
+# Inside aether-ai-portal/frontend (in a separate terminal)
+npm run dev
+# Console Output:
+#  VITE v6.x.x  ready in X ms
+#  ➜  Local:   http://localhost:5173/
+```
+
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
+
+## 🔒 Environment Isolation
 
 > [!WARNING]
-> Security is a fundamental design principle of the portal. Real live MongoDB connection URIs, credentials, and cryptographic keys must never be exposed or checked into Git version control.
+> ⚠️ **CRITICAL SECURITY COMPLIANCE**: Never commit environment secret files (`.env`) or raw Atlas DB connection credentials to Git version control. Use the masked template below to configure local instances.
 
-Developers must use the env template file [.env.example](file:///d:/Projects/WeIntern/week2-task2/aether-ai-portal/backend/.env.example) to configure environment settings locally. 
-
-### Secrets Template Overview
+### backend/.env.example Template
 ```ini
 PORT=5000
-MONGO_URI=mongodb+srv://<db_username>:<db_password>@cluster0.mongodb.net/aether_ai_db?retryWrites=true&w=majority
+MONGO_URI=your_mongodb_atlas_connection_string_here
 JWT_SECRET=your_cryptographically_strong_jwt_secret_key_here
 ```
 
-### Local Variable Setup
-1. Define `MONGO_URI` using your isolated MongoDB Atlas Cluster credentials.
-2. Generate a high-entropy string for `JWT_SECRET` (e.g., a 256-bit cryptographically random hex string).
-3. Confirm that `backend/.env` is successfully ignored by the repository's `.gitignore` rules before committing any files.
+To configure, rename the file to `.env` and fill in your private MongoDB Atlas Cluster URI and a high-entropy secret key for token signature generation.
 
-For cloud deployment settings, reference the production-ready [DEPLOYMENT.md](file:///d:/Projects/WeIntern/week2-task2/aether-ai-portal/backend/DEPLOYMENT.md) checklist.
+For production cloud deployment, configure environment settings directly inside the hosting providers' native configuration panels (e.g. Render Web Service settings and Vercel Environment Variables).
+
+<br>━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</br>
+
+## 🤝 Contributing & 📄 License
+
+This repository is built as part of the core development milestones under **WeIntern Week 2 (Task 2) & Week 3 (Task 3)**.
+
+All source code is released under the terms of the [MIT License](https://opensource.org/licenses/MIT).
