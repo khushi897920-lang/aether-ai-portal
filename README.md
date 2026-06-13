@@ -229,6 +229,6 @@ For production cloud deployment, configure environment settings directly inside 
 
 ## 🤝 Contributing & 📄 License
 
-This repository is built as part of the core development milestones under **WeIntern Week 2 (Task 2) & Week 3 (Task 3)**.
+This repository is built as part of the core development milestones under **WeIntern Week 2 (Task 2) & (Task 3)**.
 
 All source code is released under the terms of the [MIT License](https://opensource.org/licenses/MIT).
