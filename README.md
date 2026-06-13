@@ -99,7 +99,7 @@ Aether AI operates on a modern, decoupled client-server architecture. All data f
 > 
 > 📸 **Add Employee Form** — ![Add Employee Form](screenshots/add-employee.png)
 > 
-> 📸 **Register Page** — ![Register Page](screenshots/register-page.png)
+> 📸 **Logout Page** — ![Logout Page](screenshots/logout-page.png)
 > 
 > 📸 **Profile / Settings** — ![Profile / Settings](screenshots/profile-settings.png)
 
