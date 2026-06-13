@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+
+const API_BASE_URL = window.location.hostname === 'localhost'
+  ? 'http://localhost:5000/api'
+  : 'https://aether-ai-portal.onrender.com/api';
 import { 
   Users, 
   Building2, 
@@ -45,7 +49,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchDashboardData = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/employees', {
+        const res = await fetch(`${API_BASE_URL}/employees`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

@@ -1,5 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+
+const API_BASE_URL = window.location.hostname === 'localhost'
+  ? 'http://localhost:5000/api'
+  : 'https://aether-ai-portal.onrender.com/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Search, 
@@ -66,7 +70,7 @@ export default function Employees() {
   // Fetch employees list from Node/Express backend
   const fetchEmployees = async () => {
     try {
-      const res = await fetch('http://localhost:5000/api/employees', {
+      const res = await fetch(`${API_BASE_URL}/employees`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -170,7 +174,7 @@ export default function Employees() {
     try {
       if (selectedEmployee) {
         // Edit mode
-        const res = await fetch(`http://localhost:5000/api/employees/${selectedEmployee._id}`, {
+        const res = await fetch(`${API_BASE_URL}/employees/${selectedEmployee._id}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -188,7 +192,7 @@ export default function Employees() {
         }
       } else {
         // Add mode
-        const res = await fetch('http://localhost:5000/api/employees', {
+        const res = await fetch(`${API_BASE_URL}/employees`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -213,7 +217,7 @@ export default function Employees() {
 
   const handleConfirmDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/employees/${deleteId}`, {
+      const res = await fetch(`${API_BASE_URL}/employees/${deleteId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
