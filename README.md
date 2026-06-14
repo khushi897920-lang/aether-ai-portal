@@ -9,6 +9,11 @@
 
 *A Decoupled Full-Stack Enterprise Ledger & High-Security Access Gateway built for WeIntern Weeks 2 & 3*
 
+🔗 **Live Production Link:** [https://aether-ai-portal.vercel.app](https://aether-ai-portal.vercel.app)  
+📡 **Live Backend API Health:** [https://aether-ai-portal.onrender.com/api/health](https://aether-ai-portal.onrender.com/api/health)
+
+<br/>
+
 [![React 19](https://img.shields.io/badge/React_19-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](#)
 [![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](#)
 [![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white)](#)
