@@ -43,12 +43,21 @@ function EmployeeAvatar({ name, src }) {
     </div>
   );
 }
-
+ 
 export default function Employees() {
   const { token } = useAuth();
   const [employees, setEmployees] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [error, setError] = useState('');
+  
+  // Loading & operation states
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  // Sorting states
+  const [sortField, setSortField] = useState('name');
+  const [sortDirection, setSortDirection] = useState('asc'); // 'asc' or 'desc'
   
   // Modal states
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -67,6 +76,7 @@ export default function Employees() {
 
   // Fetch employees list from Node/Express backend
   const fetchEmployees = async () => {
+    setIsLoading(true);
     try {
       const res = await fetch(`${API_BASE_URL}/employees`, {
         headers: {
@@ -83,6 +93,8 @@ export default function Employees() {
     } catch (err) {
       console.error('Fetch employees list error:', err);
       setError('Network communication breakdown: Failed to fetch employee logs.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -93,21 +105,51 @@ export default function Employees() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
-  // 2. Search & Filtering Logic
-  const filteredEmployees = (employees ?? []).filter((emp) => {
-    if (!emp) return false;
-    const query = searchQuery.toLowerCase();
-    const nameStr = (emp.name ?? '').toLowerCase();
-    const deptStr = (emp.department ?? '').toLowerCase();
-    const roleStr = (emp.role ?? '').toLowerCase();
-    const emailStr = (emp.email ?? '').toLowerCase();
-    return (
-      nameStr.includes(query) ||
-      deptStr.includes(query) ||
-      roleStr.includes(query) ||
-      emailStr.includes(query)
-    );
-  });
+  // 2. Search, Filtering, and Sorting Logic
+  const filteredEmployees = (employees ?? [])
+    .filter((emp) => {
+      if (!emp) return false;
+      const query = searchQuery.toLowerCase();
+      const nameStr = (emp.name ?? '').toLowerCase();
+      const deptStr = (emp.department ?? '').toLowerCase();
+      const roleStr = (emp.role ?? '').toLowerCase();
+      const emailStr = (emp.email ?? '').toLowerCase();
+      return (
+        nameStr.includes(query) ||
+        deptStr.includes(query) ||
+        roleStr.includes(query) ||
+        emailStr.includes(query)
+      );
+    })
+    .sort((a, b) => {
+      if (!a || !b) return 0;
+      let aVal = a[sortField] ?? '';
+      let bVal = b[sortField] ?? '';
+
+      if (typeof aVal === 'string') {
+        aVal = aVal.toLowerCase();
+        bVal = bVal.toLowerCase();
+      }
+
+      if (sortField === 'joinDate') {
+        aVal = new Date(aVal).getTime();
+        bVal = new Date(bVal).getTime();
+      }
+
+      if (aVal < bVal) return sortDirection === 'asc' ? -1 : 1;
+      if (aVal > bVal) return sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+
+  // Sort Handler
+  const handleSort = (field) => {
+    if (sortField === field) {
+      setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+    } else {
+      setSortField(field);
+      setSortDirection('asc');
+    }
+  };
 
   // Modal open handlers
   const handleOpenAdd = () => {
@@ -153,6 +195,7 @@ export default function Employees() {
   const handleSave = async (e) => {
     e.preventDefault();
     setError('');
+    setIsSaving(true);
 
     // Parse input fields cleanly
     const parsedSalary = Number(String(formSalary).replace(/[^0-9]/g, ''));
@@ -210,10 +253,13 @@ export default function Employees() {
     } catch (err) {
       console.error('Save employee node error:', err);
       setError('Communication exception: Could not connect to API server.');
+    } finally {
+      setIsSaving(false);
     }
   };
 
   const handleConfirmDelete = async () => {
+    setIsDeleting(true);
     try {
       const res = await fetch(`${API_BASE_URL}/employees/${deleteId}`, {
         method: 'DELETE',
@@ -232,6 +278,8 @@ export default function Employees() {
       }
     } catch (err) {
       console.error('Delete employee node error:', err);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -283,18 +331,57 @@ export default function Employees() {
           <table className="min-w-full divide-y divide-canvas-200/50">
             <thead className="bg-[#f8fafc]/50 select-none">
               <tr>
-                <th scope="col" className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider">Employee</th>
-                <th scope="col" className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider">Department</th>
-                <th scope="col" className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider">Role</th>
-                <th scope="col" className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider">Status</th>
-                <th scope="col" className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider">Salary</th>
-                <th scope="col" className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider">Join Date</th>
-                <th scope="col" className="px-6 py-4 text-right text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider">Actions</th>
+                <th scope="col" onClick={() => handleSort('name')} className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider cursor-pointer hover:text-void-950 transition-colors select-none">
+                  <div className="flex items-center space-x-1">
+                    <span>Employee</span>
+                    {sortField === 'name' && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
+                  </div>
+                </th>
+                <th scope="col" onClick={() => handleSort('department')} className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider cursor-pointer hover:text-void-950 transition-colors select-none">
+                  <div className="flex items-center space-x-1">
+                    <span>Department</span>
+                    {sortField === 'department' && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
+                  </div>
+                </th>
+                <th scope="col" onClick={() => handleSort('role')} className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider cursor-pointer hover:text-void-950 transition-colors select-none">
+                  <div className="flex items-center space-x-1">
+                    <span>Role</span>
+                    {sortField === 'role' && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
+                  </div>
+                </th>
+                <th scope="col" onClick={() => handleSort('status')} className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider cursor-pointer hover:text-void-950 transition-colors select-none">
+                  <div className="flex items-center space-x-1">
+                    <span>Status</span>
+                    {sortField === 'status' && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
+                  </div>
+                </th>
+                <th scope="col" onClick={() => handleSort('salary')} className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider cursor-pointer hover:text-void-950 transition-colors select-none">
+                  <div className="flex items-center space-x-1">
+                    <span>Salary</span>
+                    {sortField === 'salary' && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
+                  </div>
+                </th>
+                <th scope="col" onClick={() => handleSort('joinDate')} className="px-6 py-4 text-left text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider cursor-pointer hover:text-void-950 transition-colors select-none">
+                  <div className="flex items-center space-x-1">
+                    <span>Join Date</span>
+                    {sortField === 'joinDate' && (sortDirection === 'asc' ? ' ▲' : ' ▼')}
+                  </div>
+                </th>
+                <th scope="col" className="px-6 py-4 text-right text-[10px] font-mono font-medium text-void-700/50 uppercase tracking-wider select-none">Actions</th>
               </tr>
             </thead>
             
             <tbody className="bg-white divide-y divide-canvas-200/40">
-              {(filteredEmployees ?? []).length > 0 ? (
+              {isLoading ? (
+                <tr>
+                  <td colSpan="7" className="px-6 py-12 text-center text-xs text-void-700/40 font-semibold font-sans">
+                    <div className="flex items-center justify-center space-x-2">
+                      <div className="w-4 h-4 border-2 border-forest-800 border-t-transparent rounded-full animate-spin"></div>
+                      <span>Syncing employee records from database...</span>
+                    </div>
+                  </td>
+                </tr>
+              ) : (filteredEmployees ?? []).length > 0 ? (
                 (filteredEmployees ?? []).map((emp, index) => {
                   if (!emp) return null;
                   const empId = emp._id ?? emp.id ?? `emp_fallback_${index}`;
@@ -566,10 +653,15 @@ export default function Employees() {
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-forest-800 hover:bg-forest-900 text-white rounded-xl text-xs font-semibold shadow-md flex items-center space-x-1.5 transition-all cursor-pointer"
+                    disabled={isSaving}
+                    className="px-4 py-2 bg-forest-800 hover:bg-forest-900 text-white rounded-xl text-xs font-semibold shadow-md flex items-center space-x-1.5 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
-                    <Save className="w-3.5 h-3.5" />
-                    <span>Save Record</span>
+                    {isSaving ? (
+                      <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                    ) : (
+                      <Save className="w-3.5 h-3.5" />
+                    )}
+                    <span>{isSaving ? 'Saving...' : 'Save Record'}</span>
                   </button>
                 </div>
               </form>
@@ -620,10 +712,15 @@ export default function Employees() {
                 </button>
                 <button
                   onClick={handleConfirmDelete}
-                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-semibold shadow-md flex items-center space-x-1.5 transition-all cursor-pointer"
+                  disabled={isDeleting}
+                  className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-xl text-xs font-semibold shadow-md flex items-center space-x-1.5 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  <Trash2 className="w-3.5 h-3.5" />
-                  <span>Delete Record</span>
+                  {isDeleting ? (
+                    <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                  ) : (
+                    <Trash2 className="w-3.5 h-3.5" />
+                  )}
+                  <span>{isDeleting ? 'Deleting...' : 'Delete Record'}</span>
                 </button>
               </div>
             </motion.div>
